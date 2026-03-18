@@ -12,7 +12,8 @@ module.exports = {
         'testo-scuro': '#1a1a2e',
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        sans: ['Jost', 'sans-serif'],
+        //sans: ['Poppins', 'sans-serif'],
       },
       keyframes: {
         fadeInUp: {
