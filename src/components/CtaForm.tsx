@@ -21,7 +21,7 @@ export function CtaForm() {
   return (
     <section
       id="unisciti"
-      className="bg-gradient-to-br from-verde to-ciano px-8 py-20 text-center text-white"
+      className="scroll-mt-24 bg-gradient-to-br from-verde to-ciano px-8 py-20 text-center text-white"
     >
       <div className="mx-auto max-w-2xl">
         <h2 className="text-3xl font-bold md:text-4xl">Vuoi fare la differenza?</h2>

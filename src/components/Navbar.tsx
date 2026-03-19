@@ -1,8 +1,11 @@
 import type { MouseEvent } from 'react'
 import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { navLinks } from '../data/content'
 
 export function Navbar() {
+  const location = useLocation()
+  const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
   const [hasShadow, setHasShadow] = useState(false)
 
@@ -20,12 +23,28 @@ export function Navbar() {
 
   const handleNavClick = (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
+    if (location.pathname !== '/') {
+      navigate({ pathname: '/', hash: href })
+      setIsOpen(false)
+      return
+    }
+
     const target = document.querySelector(href)
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
     setIsOpen(false)
   }
+
+  useEffect(() => {
+    if (location.pathname !== '/' || !location.hash) {
+      return
+    }
+    const target = document.querySelector(location.hash)
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [location.hash, location.pathname])
 
   return (
     <header
@@ -34,7 +53,7 @@ export function Navbar() {
       }`}
     >
       <nav className="mx-auto flex  items-center justify-between">
-        <a href="#top" className="text-2xl font-bold text-azzurro-intenso">
+        <a href="/#top" className="text-2xl font-bold text-azzurro-intenso">
           Manuelli Sindaco
         </a>
 

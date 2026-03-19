@@ -4,9 +4,10 @@ import { useFadeIn } from '../hooks/useFadeIn'
 export function ChiE() {
   const { ref, isVisible } = useFadeIn()
   const [hasImageError, setHasImageError] = useState(false)
+  const [imageSrc, setImageSrc] = useState('/assets/images/alessio-bio.jpg')
 
   return (
-    <section id="chi-e" className="bg-white px-8 py-20 md:px-12">
+    <section id="chi-e" className="scroll-mt-24 bg-white px-8 py-20 md:px-12">
       <div
         ref={ref}
         className={`mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 transition-all duration-700 md:grid-cols-[1fr_1.5fr] md:gap-16 ${
@@ -17,10 +18,20 @@ export function ChiE() {
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-gradient-to-br from-azzurro-chiaro to-ciano">
             {!hasImageError ? (
               <img
-                src="/assets/images/alessio-bio.jpg"
+                src={imageSrc}
                 alt="Alessio Manuelli"
+                width={600}
+                height={800}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover"
-                onError={() => setHasImageError(true)}
+                onError={() => {
+                  if (imageSrc.endsWith('.jpg')) {
+                    setImageSrc('/assets/images/alessio-bio.svg')
+                    return
+                  }
+                  setHasImageError(true)
+                }}
               />
             ) : (
               <div className="relative flex h-full w-full items-center justify-center px-6 text-center text-white">

@@ -17,7 +17,13 @@ export function SocialProof() {
 
         <div className="my-12 flex flex-wrap items-center justify-center gap-4 md:gap-12">
           {logoListe.map((logo) => (
-            <LogoItem key={logo.src} src={logo.src} alt={logo.alt} fallback={logo.fallback} />
+            <LogoItem
+              key={logo.src}
+              src={logo.src}
+              fallbackSrc={logo.fallbackSrc}
+              alt={logo.alt}
+              fallback={logo.fallback}
+            />
           ))}
         </div>
 
@@ -105,16 +111,18 @@ export function SocialProof() {
 
 type LogoItemProps = {
   src: string
+  fallbackSrc?: string
   alt: string
   fallback: string
 }
 
-function LogoItem({ src, alt, fallback }: LogoItemProps) {
+function LogoItem({ src, fallbackSrc, alt, fallback }: LogoItemProps) {
+  const [currentSrc, setCurrentSrc] = useState(src)
   const [hasError, setHasError] = useState(false)
 
   if (hasError) {
     return (
-      <div className="flex h-[110px] w-[110px] items-center justify-center rounded-full bg-azzurro-bg text-center text-xs font-semibold text-azzurro-intenso md:h-[180px] md:w-[180px]">
+      <div className="flex h-[110px] w-[110px] items-center justify-center rounded-full bg-white p-3 text-center text-xs font-semibold text-azzurro-intenso ring-1 ring-azzurro-chiaro/50 md:h-[180px] md:w-[180px]">
         {fallback}
       </div>
     )
@@ -122,10 +130,20 @@ function LogoItem({ src, alt, fallback }: LogoItemProps) {
 
   return (
     <img
-      src={src}
+      src={currentSrc}
       alt={alt}
-      className="h-[110px] w-[110px] rounded-full object-contain md:h-[180px] md:w-[180px]"
-      onError={() => setHasError(true)}
+      width={180}
+      height={180}
+      loading="lazy"
+      decoding="async"
+      className="h-[110px] w-[110px] rounded-full bg-white object-contain p-2 ring-1 ring-azzurro-chiaro/50 md:h-[180px] md:w-[180px] md:p-3"
+      onError={() => {
+        if (fallbackSrc && currentSrc !== fallbackSrc) {
+          setCurrentSrc(fallbackSrc)
+          return
+        }
+        setHasError(true)
+      }}
     />
   )
 }

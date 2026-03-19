@@ -15,8 +15,9 @@ export function useCarousel({ totalSlides, autoplayDelay = 5000 }: UseCarouselPa
       setSlidesPerView(1)
       return
     }
-    const isDesktop = window.innerWidth >= 1024
-    setSlidesPerView(isDesktop ? 2 : 1)
+    // Tailwind: `md` ~= 768px; nel markup ogni card usa `md:w-1/2`.
+    const isTwoUp = window.innerWidth >= 768
+    setSlidesPerView(isTwoUp ? 2 : 1)
   }, [])
 
   const goTo = useCallback(

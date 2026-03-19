@@ -1,3 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="50" y1="50" x2="360" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#308d95"/>
+      <stop offset="1" stop-color="#2fa56a"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="185" fill="url(#bg2)"/>
+  <circle cx="200" cy="200" r="185" fill="#1a1a2e" fill-opacity="0.10"/>
+  <circle cx="200" cy="200" r="168" fill="white" fill-opacity="0.10"/>
+  <text x="200" y="188" text-anchor="middle" font-family="Jost, sans-serif" font-size="30" fill="white" font-weight="800" letter-spacing="0.02em">
+    UNITI PER
+  </text>
+  <text x="200" y="235" text-anchor="middle" font-family="Jost, sans-serif" font-size="26" fill="white" font-weight="700">
+    MANUELLI
+  </text>
+</svg>
+
 <svg xmlns="http://www.w3.org/2000/svg" width="832" height="832" viewBox="0 0 832 832">
 <defs>
   <clipPath id="circleClip">

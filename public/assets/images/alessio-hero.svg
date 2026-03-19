@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1920" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c6393"/>
+      <stop offset="0.45" stop-color="#308d95"/>
+      <stop offset="1" stop-color="#2fa56a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1420 240) rotate(120) scale(780 520)">
+      <stop stop-color="#34b6d7" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#34b6d7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect width="1920" height="1080" fill="url(#glow)"/>
+  <path d="M0 760C240 660 460 820 710 740C960 660 1120 520 1370 560C1620 600 1740 740 1920 680V1080H0V760Z" fill="#1a1a2e" fill-opacity="0.18"/>
+  <path d="M0 860C260 790 480 970 740 900C1000 830 1140 720 1370 740C1600 760 1760 870 1920 820V1080H0V860Z" fill="#FFFFFF" fill-opacity="0.10"/>
+  <g opacity="0.25">
+    <circle cx="210" cy="220" r="6" fill="#FFFFFF"/>
+    <circle cx="260" cy="260" r="3" fill="#FFFFFF"/>
+    <circle cx="320" cy="210" r="4" fill="#FFFFFF"/>
+    <circle cx="1440" cy="160" r="5" fill="#FFFFFF"/>
+    <circle cx="1505" cy="215" r="3" fill="#FFFFFF"/>
+    <circle cx="1600" cy="140" r="4" fill="#FFFFFF"/>
+  </g>
+  <text x="140" y="260" font-family="Jost, sans-serif" font-size="54" fill="#FFFFFF" fill-opacity="0.92" font-weight="700">
+    Alessio Manuelli
+  </text>
+  <text x="140" y="324" font-family="Jost, sans-serif" font-size="26" fill="#FFFFFF" fill-opacity="0.82" font-weight="600">
+    #PrendiamociCura
+  </text>
+</svg>
+

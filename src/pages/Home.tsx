@@ -10,7 +10,7 @@ import { WhatsappFloat } from '../components/WhatsappFloat'
 
 export function Home() {
   return (
-    <div className="min-h-screen bg-white text-testo-scuro">
+    <div id="top" className="min-h-screen bg-white text-testo-scuro">
       <Navbar />
       <main>
         <Hero />

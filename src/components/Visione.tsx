@@ -5,7 +5,7 @@ export function Visione() {
   const { ref, isVisible } = useFadeIn()
 
   return (
-    <section id="visione" className="bg-azzurro-bg px-8 py-20">
+    <section id="visione" className="scroll-mt-24 bg-azzurro-bg px-8 py-20">
       <div
         ref={ref}
         className={`mx-auto max-w-6xl transition-all duration-700 ${

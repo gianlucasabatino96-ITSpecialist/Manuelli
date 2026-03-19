@@ -18,6 +18,7 @@ export interface NavLink {
 
 export interface LogoLista {
   src: string
+  fallbackSrc?: string
   alt: string
   fallback: string
 }

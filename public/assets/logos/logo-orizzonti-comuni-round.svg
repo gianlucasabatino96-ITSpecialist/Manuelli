@@ -1,3 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="40" y1="60" x2="360" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c6393"/>
+      <stop offset="1" stop-color="#308d95"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="185" fill="url(#bg3)"/>
+  <circle cx="200" cy="200" r="185" fill="#2fa56a" fill-opacity="0.10"/>
+  <circle cx="200" cy="200" r="168" fill="white" fill-opacity="0.08"/>
+  <text x="200" y="188" text-anchor="middle" font-family="Jost, sans-serif" font-size="30" fill="white" font-weight="800" letter-spacing="0.02em">
+    ORIZZONTI
+  </text>
+  <text x="200" y="235" text-anchor="middle" font-family="Jost, sans-serif" font-size="26" fill="white" font-weight="700">
+    COMUNI
+  </text>
+</svg>
+
 <svg xmlns="http://www.w3.org/2000/svg" width="968" height="968" viewBox="0 0 968 968">
 <defs>
   <clipPath id="circleClip">

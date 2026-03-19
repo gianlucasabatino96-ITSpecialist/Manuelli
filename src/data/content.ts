@@ -42,16 +42,19 @@ export const testimonials: Testimonial[] = [
 export const logoListe: LogoLista[] = [
   {
     src: '/assets/logos/logo-noi-con-manuelli-round.svg',
+    fallbackSrc: '/assets/logos/logo-manuelli.svg',
     alt: 'Noi con Manuelli Sindaco',
     fallback: 'Noi con Manuelli',
   },
   {
     src: '/assets/logos/logo-uniti-per-manuelli-round.svg',
+    fallbackSrc: '/assets/logos/logo-uniti-per-manuelli.png',
     alt: 'Uniti per Manuelli Sindaco',
     fallback: 'Uniti per Manuelli',
   },
   {
     src: '/assets/logos/logo-orizzonti-comuni-round.svg',
+    fallbackSrc: '/assets/logos/logo-orizzonti-comuni.jpg',
     alt: 'Orizzonti Comuni',
     fallback: 'Orizzonti Comuni',
   },
