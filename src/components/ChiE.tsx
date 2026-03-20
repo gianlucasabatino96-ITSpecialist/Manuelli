@@ -10,6 +10,7 @@ export function ChiE() {
   const sectionRef = useRef<HTMLElement>(null)
   const subtitleRef = useRef<HTMLParagraphElement>(null)
   const imageColRef = useRef<HTMLDivElement>(null)
+  const imageEntranceRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const imgRef = useRef<HTMLImageElement>(null)
   const lineVerticalRef = useRef<HTMLDivElement>(null)
@@ -21,21 +22,31 @@ export function ChiE() {
   useEffect(() => {
     const section = sectionRef.current
     const subtitle = subtitleRef.current
-    const image = imageColRef.current
+    const imageBlock = imageEntranceRef.current
     const content = contentRef.current
     const img = imgRef.current
     const lineV = lineVerticalRef.current
     const lineH = lineHorizontalRef.current
 
-    if (!section || !subtitle || !image || !content) return
+    if (!section || !subtitle || !content) return
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (prefersReducedMotion) {
-      if (lineV) gsap.set(lineV, { scaleY: 1, transformOrigin: 'top center' })
-      if (lineH) gsap.set(lineH, { scaleX: 1, transformOrigin: 'left center' })
+      if (lineV) gsap.set(lineV, { scaleY: 1, transformOrigin: 'top center', force3D: true })
+      if (lineH) gsap.set(lineH, { scaleX: 1, transformOrigin: 'left center', force3D: true })
       return
     }
+
+    const lineTrigger =
+      imageBlock != null
+        ? {
+            trigger: imageBlock,
+            start: 'top 75%',
+            toggleActions: 'play none none none' as const,
+            invalidateOnRefresh: true,
+          }
+        : null
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -54,65 +65,65 @@ export function ChiE() {
         },
       )
 
-      gsap.fromTo(
-        image,
-        { opacity: 0, x: -80 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: image,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
-        },
-      )
-
-      if (img && !hasImageError) {
-        gsap.to(img, {
-          yPercent: -10,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1,
-          },
-        })
-      }
-
-      if (lineV) {
+      if (imageBlock) {
         gsap.fromTo(
-          lineV,
-          { scaleY: 0, transformOrigin: 'top center' },
+          imageBlock,
+          { opacity: 0, x: -80 },
           {
-            scaleY: 1,
+            opacity: 1,
+            x: 0,
             duration: 1,
-            ease: 'power2.out',
+            ease: 'power3.out',
+            force3D: true,
             scrollTrigger: {
-              trigger: image,
-              start: 'top 75%',
+              trigger: imageBlock,
+              start: 'top 80%',
               toggleActions: 'play none none none',
+              invalidateOnRefresh: true,
             },
           },
         )
       }
 
-      if (lineH) {
+      if (img && !hasImageError) {
+        gsap.to(img, {
+          yPercent: -10,
+          ease: 'none',
+          force3D: true,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.4,
+            invalidateOnRefresh: true,
+          },
+        })
+      }
+
+      if (lineV && lineTrigger) {
+        gsap.fromTo(
+          lineV,
+          { scaleY: 0, transformOrigin: 'top center', force3D: true },
+          {
+            scaleY: 1,
+            duration: 1,
+            ease: 'power2.out',
+            force3D: true,
+            scrollTrigger: lineTrigger,
+          },
+        )
+      }
+
+      if (lineH && lineTrigger) {
         gsap.fromTo(
           lineH,
-          { scaleX: 0, transformOrigin: 'left center' },
+          { scaleX: 0, transformOrigin: 'left center', force3D: true },
           {
             scaleX: 1,
             duration: 1.2,
             ease: 'power2.out',
-            scrollTrigger: {
-              trigger: image,
-              start: 'top 75%',
-              toggleActions: 'play none none none',
-            },
+            force3D: true,
+            scrollTrigger: lineTrigger,
           },
         )
       }
@@ -126,6 +137,7 @@ export function ChiE() {
           duration: 0.8,
           stagger: 0.15,
           ease: 'power3.out',
+          force3D: true,
           scrollTrigger: {
             trigger: content,
             start: 'top 80%',
@@ -139,6 +151,12 @@ export function ChiE() {
       ctx.revert()
     }
   }, [hasImageError])
+
+  const handleImageLoad = () => {
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh()
+    })
+  }
 
   return (
     <section
@@ -159,25 +177,28 @@ export function ChiE() {
           <div ref={imageColRef} className="relative z-0 w-full lg:w-1/2">
             {!hasImageError ? (
               <div className="relative w-full max-w-md lg:max-w-none">
-                <div className="overflow-hidden rounded-none bg-azzurro-bg/80">
-                  <div className="relative aspect-[3/4] w-full overflow-hidden">
-                    <img
-                      ref={imgRef}
-                      src={imageSrc}
-                      alt="Alessio Manuelli"
-                      width={600}
-                      height={800}
-                      loading="lazy"
-                      decoding="async"
-                      className="absolute inset-0 h-full w-full scale-110 object-cover will-change-transform"
-                      onError={() => {
-                        if (imageSrc.endsWith('.jpg')) {
-                          setImageSrc('/assets/images/alessio-bio.svg')
-                          return
-                        }
-                        setHasImageError(true)
-                      }}
-                    />
+                <div ref={imageEntranceRef}>
+                  <div className="overflow-hidden rounded-none bg-azzurro-bg/80">
+                    <div className="relative aspect-[3/4] w-full overflow-hidden">
+                      <img
+                        ref={imgRef}
+                        src={imageSrc}
+                        alt="Alessio Manuelli"
+                        width={600}
+                        height={800}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover"
+                        onLoad={handleImageLoad}
+                        onError={() => {
+                          if (imageSrc.endsWith('.jpg')) {
+                            setImageSrc('/assets/images/alessio-bio.svg')
+                            return
+                          }
+                          setHasImageError(true)
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -205,64 +226,48 @@ export function ChiE() {
             ref={contentRef}
             className="relative z-10 w-full space-y-0 lg:w-1/2 [&_strong]:text-azzurro-intenso"
           >
-            <div>
-              <h2 className="mb-4 text-[1.3rem] font-extrabold leading-tight text-azzurro-intenso md:mb-6 md:text-[2rem] md:font-bold lg:text-[2.25rem]">
-                Una persona di questa città, con le idee chiare.
-              </h2>
+            <h2 className="mb-4 text-[1.3rem] font-extrabold leading-tight text-azzurro-intenso md:mb-6 md:text-[2rem] md:font-bold lg:text-[2.25rem]">
+              Una persona di questa città, con le idee chiare.
+            </h2>
+
+            <div className="mb-6 flex flex-wrap gap-3">
+              <span className="flex items-center gap-2 rounded-full border border-ciano bg-azzurro-bg px-4 py-2 text-sm text-azzurro-intenso transition-colors hover:bg-azzurro-bg/90">
+                <span aria-hidden="true">🩺</span>
+                <span>Cardiologo</span>
+              </span>
+              <span className="flex items-center gap-2 rounded-full border border-ciano bg-azzurro-bg px-4 py-2 text-sm text-azzurro-intenso transition-colors hover:bg-azzurro-bg/90">
+                <span aria-hidden="true">📌</span>
+                <span>Consigliere Comunale</span>
+              </span>
+              <span className="flex items-center gap-2 rounded-full border border-ciano bg-azzurro-bg px-4 py-2 text-sm text-azzurro-intenso transition-colors hover:bg-azzurro-bg/90">
+                <span aria-hidden="true">🤝</span>
+                <span>Volontario</span>
+              </span>
             </div>
 
-            <div>
-              <div className="mb-6 flex flex-wrap gap-3">
-                <span className="flex items-center gap-2 rounded-full border border-ciano bg-azzurro-bg px-4 py-2 text-sm text-azzurro-intenso transition-colors hover:bg-azzurro-bg/90">
-                  <span aria-hidden="true">🩺</span>
-                  <span>Cardiologo</span>
-                </span>
-                <span className="flex items-center gap-2 rounded-full border border-ciano bg-azzurro-bg px-4 py-2 text-sm text-azzurro-intenso transition-colors hover:bg-azzurro-bg/90">
-                  <span aria-hidden="true">📌</span>
-                  <span>Consigliere Comunale</span>
-                </span>
-                <span className="flex items-center gap-2 rounded-full border border-ciano bg-azzurro-bg px-4 py-2 text-sm text-azzurro-intenso transition-colors hover:bg-azzurro-bg/90">
-                  <span aria-hidden="true">🤝</span>
-                  <span>Volontario</span>
-                </span>
-              </div>
-            </div>
-
-            <div>
-              <p className="mb-4 text-[0.93rem] leading-relaxed text-testo-scuro md:text-[1.05rem]">
+            <div className="space-y-4 text-[0.93rem] leading-relaxed text-testo-scuro md:text-[1.05rem]">
+              <p>
                 Ho trent'anni, sono cresciuto a Santa Marinella e ho scelto di restare — perché questa città
                 vale la pena di essere curata.
               </p>
-            </div>
-
-            <div>
-              <p className="mb-4 text-[0.93rem] leading-relaxed text-testo-scuro md:text-[1.05rem]">
+              <p>
                 <strong>Cardiologo specializzando in Malattie dell'Apparato Cardiovascolare</strong> presso il
                 Policlinico Tor Vergata, con Master in Medicina d'Emergenza. Ho imparato che davanti a un
                 problema non ci si può permettere improvvisazione: serve{' '}
                 <strong>ascolto, analisi e cura</strong>. Lo stesso metodo che voglio portare in Comune.
               </p>
-            </div>
-
-            <div>
-              <p className="mb-4 text-[0.93rem] leading-relaxed text-testo-scuro md:text-[1.05rem]">
+              <p>
                 Come <strong>Consigliere Comunale</strong> ho lavorato concretamente sulle deleghe a{' '}
                 <strong>Sanità e Turismo</strong> — dalla Città Cardio Protetta alle campagne informative sulla
                 prevenzione, dall'Archeobus alla riapertura e ripristino del Pit, punto di informazione
                 turistica. Ho portato risultati concreti, non promesse. Non da fuori, ma da dentro.
               </p>
-            </div>
-
-            <div>
-              <p className="mb-4 text-[0.93rem] leading-relaxed text-testo-scuro md:text-[1.05rem]">
+              <p>
                 Cresciuto a Santa Marinella, dove vivo da sempre, formato alla Sapienza Università di Roma, ho
                 sempre creduto nel valore del <strong>volontariato e della partecipazione attiva</strong>.
                 Perché una comunità forte si costruisce insieme, giorno dopo giorno.
               </p>
-            </div>
-
-            <div>
-              <p className="mb-4 text-[0.93rem] leading-relaxed text-testo-scuro md:text-[1.05rem]">
+              <p>
                 <strong>Oggi sono pronto a fare il passo successivo — insieme a chi ci tiene davvero.</strong>
               </p>
             </div>
