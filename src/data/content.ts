@@ -7,11 +7,11 @@ export const navLinks: NavLink[] = [
 ]
 
 export const visioneCards: VisioneCard[] = [
-  { emoji: '🏥', title: 'Sanità e servizi', status: 'prossimamente' },
-  { emoji: '🏛️', title: 'Cultura e turismo', status: 'prossimamente' },
-  { emoji: '🌊', title: 'Territorio e ambiente', status: 'prossimamente' },
-  { emoji: '👥', title: 'Comunità e partecipazione', status: 'prossimamente' },
-  { emoji: '🚀', title: 'Futuro e lavoro', status: 'prossimamente' },
+  { emoji: '🏥', title: 'Sanità e servizi', status: 'prossimamente', description: 'Defibrillatori, prevenzione, sportelli d\'ascolto e servizi di prossimità.' },
+  { emoji: '🏛️', title: 'Cultura e turismo', status: 'prossimamente', description: 'Archeobus, eventi estivi, Castello di Santa Severa e attrattori permanenti.' },
+  { emoji: '🌊', title: 'Territorio e ambiente', status: 'prossimamente', description: 'Decoro urbano, gestione rifiuti, mobilità sostenibile e opere PNRR.' },
+  { emoji: '👥', title: 'Comunità e partecipazione', status: 'prossimamente', description: 'Consiglio Comunale dei Giovani, dialogo costante e trasparenza reale.' },
+  { emoji: '🚀', title: 'Futuro e lavoro', status: 'prossimamente', description: 'Innovazione, digitalizzazione, turismo accessibile e Bandiera Lilla.' },
 ]
 
 export const testimonials: Testimonial[] = [
@@ -30,6 +30,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "Alessio ha un'identità che ha dimostrato in ogni tempo e in ogni ruolo, ed ha un futuro.",
     author: 'Ileana Giacomelli',
+    role: 'Dirigente scolastica, Santa Marinella',
   },
   {
     quote:
@@ -45,18 +46,21 @@ export const logoListe: LogoLista[] = [
     fallbackSrc: '/assets/logos/logo-manuelli.svg',
     alt: 'Noi con Manuelli Sindaco',
     fallback: 'Noi con Manuelli',
+    name: 'Noi con Manuelli',
   },
   {
     src: '/assets/logos/logo-uniti-per-manuelli-round.svg',
     fallbackSrc: '/assets/logos/logo-uniti-per-manuelli.png',
     alt: 'Uniti per Manuelli Sindaco',
     fallback: 'Uniti per Manuelli',
+    name: 'Uniti per Manuelli',
   },
   {
     src: '/assets/logos/logo-orizzonti-comuni-round.svg',
     fallbackSrc: '/assets/logos/logo-orizzonti-comuni.jpg',
     alt: 'Orizzonti Comuni',
     fallback: 'Orizzonti Comuni',
+    name: 'Orizzonti Comuni',
   },
 ]
 

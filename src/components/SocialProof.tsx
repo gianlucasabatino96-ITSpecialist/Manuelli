@@ -1,28 +1,40 @@
 import { useState } from 'react'
 import { logoListe, testimonials } from '../data/content'
 import { useCarousel } from '../hooks/useCarousel'
+import { useCountUp } from '../hooks/useCountUp'
+import { useFadeIn } from '../hooks/useFadeIn'
 
 export function SocialProof() {
   const { currentIndex, slidesPerView, next, prev, goTo, startAutoplay, stopAutoplay } =
     useCarousel({ totalSlides: testimonials.length, autoplayDelay: 5000 })
 
+  const { ref: logosRef, isVisible: logosVisible } = useFadeIn()
+  const { ref: counterRef, isVisible: counterVisible } = useFadeIn()
+  const count = useCountUp(300, 2000, counterVisible)
+
   const translatePercentage = (currentIndex / Math.max(slidesPerView, 1)) * 100
 
   return (
-    <section className="bg-white px-8 py-20">
+    <section aria-label="Sostegno alla candidatura" className="bg-white px-8 py-20">
       <div className="mx-auto max-w-6xl">
         <h2 className="text-center text-3xl font-bold text-azzurro-intenso md:text-4xl">
           Un progetto largo, per tutta la città
         </h2>
 
-        <div className="my-12 flex flex-wrap items-center justify-center gap-4 md:gap-12">
-          {logoListe.map((logo) => (
+        <div
+          ref={logosRef}
+          className="my-12 flex flex-wrap items-center justify-center gap-4 md:gap-12"
+        >
+          {logoListe.map((logo, index) => (
             <LogoItem
               key={logo.src}
               src={logo.src}
               fallbackSrc={logo.fallbackSrc}
               alt={logo.alt}
               fallback={logo.fallback}
+              name={logo.name}
+              index={index}
+              isContainerVisible={logosVisible}
             />
           ))}
         </div>
@@ -53,7 +65,7 @@ export function SocialProof() {
                         {testimonial.author}
                       </p>
                       {testimonial.role ? (
-                        <p className="text-[0.9rem] font-normal text-[#666]">{testimonial.role}</p>
+                        <p className="text-[0.75rem] font-normal text-gray-500">{testimonial.role}</p>
                       ) : null}
                     </div>
                   </div>
@@ -99,7 +111,12 @@ export function SocialProof() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-[3rem] font-bold text-verde md:text-[4rem]">300+</p>
+          <p
+            ref={counterRef}
+            className="text-[3rem] font-bold text-verde md:text-[4rem]"
+          >
+            {count}+
+          </p>
           <p className="mt-2 text-[1.1rem] text-[#666]">
             cittadini alla prima serata pubblica
           </p>
@@ -114,36 +131,52 @@ type LogoItemProps = {
   fallbackSrc?: string
   alt: string
   fallback: string
+  name: string
+  index: number
+  isContainerVisible: boolean
 }
 
-function LogoItem({ src, fallbackSrc, alt, fallback }: LogoItemProps) {
+function LogoItem({ src, fallbackSrc, alt, fallback, name, index, isContainerVisible }: LogoItemProps) {
   const [currentSrc, setCurrentSrc] = useState(src)
   const [hasError, setHasError] = useState(false)
 
+  const animStyle = {
+    transitionDelay: `${index * 150}ms`,
+    transform: isContainerVisible ? 'scale(1)' : 'scale(0.85)',
+    opacity: isContainerVisible ? 1 : 0,
+    transition: 'transform 0.5s ease, opacity 0.5s ease',
+  }
+
   if (hasError) {
     return (
-      <div className="flex h-[110px] w-[110px] items-center justify-center rounded-full bg-white p-3 text-center text-xs font-semibold text-azzurro-intenso ring-1 ring-azzurro-chiaro/50 md:h-[180px] md:w-[180px]">
-        {fallback}
+      <div className="flex flex-col items-center" style={animStyle}>
+        <div className="flex h-[110px] w-[110px] items-center justify-center rounded-full bg-white p-3 text-center text-xs font-semibold text-azzurro-intenso ring-1 ring-azzurro-chiaro/50 md:h-[180px] md:w-[180px]">
+          {fallback}
+        </div>
+        <p className="mt-2 text-center text-xs font-medium text-testo-scuro/70">{name}</p>
       </div>
     )
   }
 
   return (
-    <img
-      src={currentSrc}
-      alt={alt}
-      width={180}
-      height={180}
-      loading="lazy"
-      decoding="async"
-      className="h-[110px] w-[110px] rounded-full bg-white object-contain p-2 ring-1 ring-azzurro-chiaro/50 md:h-[180px] md:w-[180px] md:p-3"
-      onError={() => {
-        if (fallbackSrc && currentSrc !== fallbackSrc) {
-          setCurrentSrc(fallbackSrc)
-          return
-        }
-        setHasError(true)
-      }}
-    />
+    <div className="flex flex-col items-center" style={animStyle}>
+      <img
+        src={currentSrc}
+        alt={alt}
+        width={180}
+        height={180}
+        loading="lazy"
+        decoding="async"
+        className="h-[110px] w-[110px] rounded-full bg-white object-contain p-2 ring-1 ring-azzurro-chiaro/50 md:h-[180px] md:w-[180px] md:p-3"
+        onError={() => {
+          if (fallbackSrc && currentSrc !== fallbackSrc) {
+            setCurrentSrc(fallbackSrc)
+            return
+          }
+          setHasError(true)
+        }}
+      />
+      <p className="mt-2 text-center text-xs font-medium text-testo-scuro/70">{name}</p>
+    </div>
   )
 }

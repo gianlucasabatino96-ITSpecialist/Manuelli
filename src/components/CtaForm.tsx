@@ -1,11 +1,13 @@
 import type { FormEvent } from 'react'
 import { useState } from 'react'
 import { whatsappNumber } from '../data/content'
+import { useFadeIn } from '../hooks/useFadeIn'
 
 export function CtaForm() {
   const [nome, setNome] = useState('')
   const [telefono, setTelefono] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const { ref, directionClasses } = useFadeIn()
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -21,6 +23,7 @@ export function CtaForm() {
   return (
     <section
       id="unisciti"
+      aria-label="Modulo di contatto — Unisciti alla campagna"
       className="scroll-mt-24 bg-gradient-to-br from-verde to-ciano px-8 py-20 text-center text-white"
     >
       <div className="mx-auto max-w-2xl">
@@ -29,41 +32,46 @@ export function CtaForm() {
           Lascia il tuo nome e numero: ti contatteremo su WhatsApp per tenerti aggiornato sugli eventi, le iniziative e come puoi contribuire.
         </p>
 
-        <form onSubmit={handleSubmit} className="mx-auto mt-8 max-w-lg space-y-4">
-          <input
-            type="text"
-            name="nome"
-            placeholder="Nome e cognome"
-            value={nome}
-            onChange={(event) => setNome(event.target.value)}
-            required
-            className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
-          />
-          <input
-            type="tel"
-            name="telefono"
-            placeholder="Numero di telefono"
-            value={telefono}
-            onChange={(event) => setTelefono(event.target.value)}
-            required
-            className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
-          />
+        <div
+          ref={ref}
+          className={`transition-all duration-700 ${directionClasses}`}
+        >
+          <form onSubmit={handleSubmit} className="mx-auto mt-8 max-w-lg space-y-4">
+            <input
+              type="text"
+              name="nome"
+              placeholder="Nome e cognome"
+              value={nome}
+              onChange={(event) => setNome(event.target.value)}
+              required
+              className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
+            />
+            <input
+              type="tel"
+              name="telefono"
+              placeholder="Numero di telefono"
+              value={telefono}
+              onChange={(event) => setTelefono(event.target.value)}
+              required
+              className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
+            />
 
-          <button
-            type="submit"
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-bold text-verde shadow-md transition hover:bg-gray-100"
-          >
-            <WhatsAppIcon />
-            <span>Unisciti su WhatsApp</span>
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-bold text-verde shadow-md transition hover:bg-gray-100 animate-pulseVerde"
+            >
+              <WhatsAppIcon />
+              <span>Unisciti su WhatsApp</span>
+            </button>
+          </form>
 
-        {submitted ? (
-          <div className="mx-auto mt-6 max-w-lg rounded-2xl bg-white/20 p-6 text-sm backdrop-blur">
-            <h3 className="text-lg font-bold">Grazie! 🎉</h3>
-            <p className="mt-2">Ti contatteremo presto su WhatsApp.</p>
-          </div>
-        ) : null}
+          {submitted ? (
+            <div className="mx-auto mt-6 max-w-lg rounded-2xl bg-white/20 p-6 text-sm backdrop-blur">
+              <h3 className="text-lg font-bold">Grazie! 🎉</h3>
+              <p className="mt-2">Ti contatteremo presto su WhatsApp.</p>
+            </div>
+          ) : null}
+        </div>
 
         <p className="mt-4 text-sm text-white/80">Nessuno spam. Solo aggiornamenti sulla campagna.</p>
       </div>
@@ -91,4 +99,3 @@ function WhatsAppIcon() {
     </svg>
   )
 }
-

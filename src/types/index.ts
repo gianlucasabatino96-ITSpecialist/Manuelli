@@ -21,5 +21,6 @@ export interface LogoLista {
   fallbackSrc?: string
   alt: string
   fallback: string
+  name: string
 }
 

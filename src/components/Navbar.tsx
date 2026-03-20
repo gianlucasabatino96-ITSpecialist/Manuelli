@@ -1,5 +1,5 @@
 import type { MouseEvent } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navLinks } from '../data/content'
 
@@ -8,6 +8,7 @@ export function Navbar() {
   const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
   const [hasShadow, setHasShadow] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,12 +49,12 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 bg-white px-6 py-4 md:px-8 transition-shadow ${
+      className={`fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-sm px-6 py-4 md:px-8 transition-shadow ${
         hasShadow ? 'shadow-md' : ''
       }`}
     >
       <nav className="mx-auto flex  items-center justify-between">
-        <a href="/#top" className="text-2xl font-bold text-azzurro-intenso">
+        <a href="/#top" aria-label="Torna alla home" className="text-2xl font-bold text-azzurro-intenso">
           Manuelli Sindaco
         </a>
 
@@ -97,9 +98,9 @@ export function Navbar() {
       </nav>
 
       <div
-        className={`md:hidden overflow-hidden transition-[max-height] duration-300 ${
-          isOpen ? 'max-h-60' : 'max-h-0'
-        }`}
+        ref={menuRef}
+        className="md:hidden overflow-hidden transition-[max-height] duration-300"
+        style={{ maxHeight: isOpen ? `${menuRef.current?.scrollHeight ?? 200}px` : '0' }}
       >
         <ul className="space-y-2 px-2 pt-3 pb-4">
           {navLinks.map((link) => (

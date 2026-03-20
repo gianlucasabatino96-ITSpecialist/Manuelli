@@ -1,7 +1,8 @@
 export function Hero() {
   return (
     <section
-      className="relative flex min-h-screen items-end bg-cover bg-[position:60%_35%] md:items-end md:bg-[position:50%_5%]"
+      aria-label="Sezione hero — Alessio Manuelli Candidato Sindaco"
+      className="relative flex min-h-screen items-end bg-cover bg-[position:60%_35%] pb-[130px] md:items-end md:bg-[position:50%_5%] md:pb-[160px]"
       style={{ backgroundImage: "url('/assets/images/alessio-hero.jpg')" }}
     >
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(12,99,147,0.88)_0%,rgba(12,99,147,0.60)_45%,rgba(12,99,147,0.10)_70%,rgba(12,99,147,0.00)_100%)] md:bg-[linear-gradient(to_right,rgba(12,99,147,0.80)_0%,rgba(12,99,147,0.50)_22%,rgba(12,99,147,0.10)_45%,rgba(12,99,147,0.00)_65%)]" />

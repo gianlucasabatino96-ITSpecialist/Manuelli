@@ -5,7 +5,7 @@ export function Visione() {
   const { ref, isVisible } = useFadeIn()
 
   return (
-    <section id="visione" className="scroll-mt-24 bg-azzurro-bg px-8 py-20">
+    <section id="visione" aria-label="Il programma — Su cosa lavoreremo insieme" className="scroll-mt-24 bg-azzurro-bg px-8 py-20">
       <div
         ref={ref}
         className={`mx-auto max-w-6xl transition-all duration-700 ${
@@ -19,12 +19,17 @@ export function Visione() {
           Il programma è in costruzione — proprio come si costruisce una buona amministrazione: ascoltando prima di decidere. Torna presto, i punti saranno qui.
         </p>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
           {visioneCards.map((card, index) => (
             <article
               key={card.title}
-              className="flex flex-row items-center gap-4 rounded-[10px] border-t-[3px] border-verde bg-white p-5 shadow-sm transition-transform hover:-translate-y-1 md:flex-col md:p-8 md:text-center"
-              style={{ transitionDelay: `${index * 80}ms` }}
+              className={`flex w-full flex-row items-center gap-4 rounded-[10px] border-t-[3px] border-verde bg-white p-5 shadow-sm transition-transform hover:-translate-y-1 md:flex-col md:p-8 md:text-center ${
+                index === 4 ? 'md:col-span-2 md:max-w-[50%] lg:col-span-1 lg:max-w-none' : ''
+              } ${isVisible ? 'animate-cardReveal' : 'opacity-0'}`}
+              style={{
+                animationDelay: `${index * 100}ms`,
+                animationFillMode: 'both',
+              }}
             >
               <div className="w-[48px] text-[2rem] md:mb-4 md:w-auto md:text-[3rem]">{card.emoji}</div>
               <div className="flex-1 space-y-2 text-left md:text-center">
@@ -45,4 +50,3 @@ export function Visione() {
     </section>
   )
 }
-
