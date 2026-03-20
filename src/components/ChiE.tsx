@@ -51,15 +51,15 @@ export function ChiE() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         subtitle,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 18 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
+          duration: 1.15,
+          ease: 'sine.out',
           scrollTrigger: {
             trigger: subtitle,
-            start: 'top 85%',
+            start: 'top 88%',
             toggleActions: 'play none none none',
           },
         },
@@ -68,16 +68,16 @@ export function ChiE() {
       if (imageBlock) {
         gsap.fromTo(
           imageBlock,
-          { opacity: 0, x: -80 },
+          { opacity: 0, x: -48 },
           {
             opacity: 1,
             x: 0,
-            duration: 1,
-            ease: 'power3.out',
+            duration: 1.35,
+            ease: 'sine.out',
             force3D: true,
             scrollTrigger: {
               trigger: imageBlock,
-              start: 'top 80%',
+              start: 'top 82%',
               toggleActions: 'play none none none',
               invalidateOnRefresh: true,
             },
@@ -87,14 +87,14 @@ export function ChiE() {
 
       if (img && !hasImageError) {
         gsap.to(img, {
-          yPercent: -10,
+          yPercent: -7,
           ease: 'none',
           force3D: true,
           scrollTrigger: {
             trigger: section,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 0.4,
+            scrub: 0.75,
             invalidateOnRefresh: true,
           },
         })
@@ -106,8 +106,8 @@ export function ChiE() {
           { scaleY: 0, transformOrigin: 'top center', force3D: true },
           {
             scaleY: 1,
-            duration: 1,
-            ease: 'power2.out',
+            duration: 1.45,
+            ease: 'sine.out',
             force3D: true,
             scrollTrigger: lineTrigger,
           },
@@ -120,8 +120,8 @@ export function ChiE() {
           { scaleX: 0, transformOrigin: 'left center', force3D: true },
           {
             scaleX: 1,
-            duration: 1.2,
-            ease: 'power2.out',
+            duration: 1.65,
+            ease: 'sine.out',
             force3D: true,
             scrollTrigger: lineTrigger,
           },
@@ -130,17 +130,17 @@ export function ChiE() {
 
       gsap.fromTo(
         content.children,
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 26 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: 'power3.out',
+          duration: 1.05,
+          stagger: { each: 0.24, ease: 'sine.out' },
+          ease: 'sine.out',
           force3D: true,
           scrollTrigger: {
             trigger: content,
-            start: 'top 80%',
+            start: 'top 82%',
             toggleActions: 'play none none none',
           },
         },
