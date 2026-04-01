@@ -150,7 +150,7 @@ function LogoItem({ src, fallbackSrc, alt, fallback, name, index, isContainerVis
   if (hasError) {
     return (
       <div className="flex flex-col items-center" style={animStyle}>
-        <div className="flex h-[110px] w-[110px] items-center justify-center rounded-full bg-white p-3 text-center text-xs font-semibold text-azzurro-intenso ring-1 ring-azzurro-chiaro/50 md:h-[180px] md:w-[180px]">
+        <div className="flex h-[110px] w-[110px] items-center justify-center rounded-full bg-white p-3 text-center text-xs font-semibold text-azzurro-intenso md:h-[180px] md:w-[180px]">
           {fallback}
         </div>
         <p className="mt-2 text-center text-xs font-medium text-testo-scuro/70">{name}</p>
@@ -167,7 +167,7 @@ function LogoItem({ src, fallbackSrc, alt, fallback, name, index, isContainerVis
         height={180}
         loading="lazy"
         decoding="async"
-        className="h-[110px] w-[110px] rounded-full bg-white object-contain p-2 ring-1 ring-azzurro-chiaro/50 md:h-[180px] md:w-[180px] md:p-3"
+        className="h-[110px] w-[110px] rounded-full bg-white object-contain p-2 md:h-[180px] md:w-[180px] md:p-3"
         onError={() => {
           if (fallbackSrc && currentSrc !== fallbackSrc) {
             setCurrentSrc(fallbackSrc)
