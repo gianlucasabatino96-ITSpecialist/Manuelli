@@ -6,12 +6,22 @@ export const navLinks: NavLink[] = [
   { label: 'Unisciti', href: '#unisciti' },
 ]
 
+export const visioneStressTestDescription = `— Sicurezza stradale:
+• Interventi mirati sui punti critici
+• Segnaletica intelligente
+• Dissuasori di velocità
+• Potenziamento dell’illuminazione pubblica nelle zone centrali e periferiche.
+
+— Monitoraggio infrastrutture:
+• Tavolo tecnico permanente con Società Autostrade, ANAS e RFI
+• Verifica costante e messa in sicurezza dei viadotti e dei sottopassi presenti sul territorio.`
+
 export const visioneCards: VisioneCard[] = [
-  { emoji: '🏥', title: 'Sanità e servizi', status: 'prossimamente', description: 'Defibrillatori, prevenzione, sportelli d\'ascolto e servizi di prossimità.' },
-  { emoji: '🏛️', title: 'Cultura e turismo', status: 'prossimamente', description: 'Archeobus, eventi estivi, Castello di Santa Severa e attrattori permanenti.' },
-  { emoji: '🌊', title: 'Territorio e ambiente', status: 'prossimamente', description: 'Decoro urbano, gestione rifiuti, mobilità sostenibile e opere PNRR.' },
-  { emoji: '👥', title: 'Comunità e partecipazione', status: 'prossimamente', description: 'Consiglio Comunale dei Giovani, dialogo costante e trasparenza reale.' },
-  { emoji: '🚀', title: 'Futuro e lavoro', status: 'prossimamente', description: 'Innovazione, digitalizzazione, turismo accessibile e Bandiera Lilla.' },
+  { emoji: '🏥', title: 'Infrastrutture e sicurezza stradale', status: 'prossimamente', description: visioneStressTestDescription },
+  { emoji: '🏛️', title: 'Cultura e turismo', status: 'prossimamente', description: visioneStressTestDescription },
+  { emoji: '🌊', title: 'Ambiente e verde pubblico', status: 'prossimamente', description: visioneStressTestDescription },
+  { emoji: '👥', title: 'Decoro urbano e arredo urbano', status: 'prossimamente', description: visioneStressTestDescription },
+  { emoji: '🚀', title: 'Sport e politiche giovani', status: 'prossimamente', description: visioneStressTestDescription },
 ]
 
 export const testimonials: Testimonial[] = [
