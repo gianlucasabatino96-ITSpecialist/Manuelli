@@ -58,11 +58,13 @@ export function useCarousel({ totalSlides, autoplayDelay = 5000 }: UseCarouselPa
   }, [autoplayDelay, totalSlides])
 
   useEffect(() => {
-    updateSlidesPerView()
-
     if (typeof window === 'undefined') {
       return
     }
+
+    const frameId = requestAnimationFrame(() => {
+      updateSlidesPerView()
+    })
 
     const handleResize = () => {
       updateSlidesPerView()
@@ -71,6 +73,7 @@ export function useCarousel({ totalSlides, autoplayDelay = 5000 }: UseCarouselPa
     window.addEventListener('resize', handleResize)
 
     return () => {
+      cancelAnimationFrame(frameId)
       window.removeEventListener('resize', handleResize)
     }
   }, [updateSlidesPerView])

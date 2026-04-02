@@ -162,8 +162,8 @@ export function ChiE() {
     <section
       id="chi-e"
       ref={sectionRef}
-      aria-label="Chi è Alessio Manuelli"
-      className="relative overflow-x-hidden bg-white py-16 text-testo-scuro scroll-mt-24 lg:py-20"
+      aria-labelledby="chie-heading"
+      className="relative overflow-x-clip overflow-y-visible bg-white py-16 text-testo-scuro scroll-mt-24 lg:py-20"
     >
       <p
         ref={subtitleRef}
@@ -183,7 +183,7 @@ export function ChiE() {
                       <img
                         ref={imgRef}
                         src={imageSrc}
-                        alt="Alessio Manuelli"
+                        alt="Ritratto di Alessio Manuelli"
                         width={600}
                         height={800}
                         loading="lazy"
@@ -226,7 +226,10 @@ export function ChiE() {
             ref={contentRef}
             className="relative z-10 w-full space-y-0 lg:w-1/2 [&_strong]:text-azzurro-intenso"
           >
-            <h2 className="mb-4 text-[1.3rem] font-extrabold leading-tight text-azzurro-intenso md:mb-6 md:text-[2rem] md:font-bold lg:text-[2.25rem]">
+            <h2
+              id="chie-heading"
+              className="mb-4 text-[1.3rem] font-extrabold leading-tight text-azzurro-intenso md:mb-6 md:text-[2rem] md:font-bold lg:text-[2.25rem]"
+            >
               Una persona di questa città, con le idee chiare.
             </h2>
 

@@ -5,21 +5,23 @@ export function Footer() {
     <footer className="bg-testo-scuro px-8 py-12 text-white">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-3">
         <div>
-          <h4 className="mb-4 text-lg font-semibold text-verde">Alessio Manuelli</h4>
+          <h3 className="mb-4 text-lg font-semibold text-verde">Alessio Manuelli</h3>
           <p className="text-sm text-white/90">Candidato Sindaco</p>
           <p className="footer-claim mt-2 text-[1.1rem] font-semibold text-verde">#PrendiamociCura</p>
         </div>
 
         <div>
-          <h4 className="mb-4 text-lg font-semibold text-verde">Seguici</h4>
+          <h3 className="mb-4 text-lg font-semibold text-verde">Seguici</h3>
           <div className="flex flex-wrap gap-3">
             <a
               href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Profilo Instagram di Alessio Manuelli"
               className="inline-flex items-center gap-3 rounded bg-white/10 px-4 py-2 text-sm transition hover:bg-verde"
             >
               <svg
+                aria-hidden="true"
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
@@ -34,9 +36,11 @@ export function Footer() {
               href={facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Pagina Facebook di Alessio Manuelli"
               className="inline-flex items-center gap-3 rounded bg-white/10 px-4 py-2 text-sm transition hover:bg-verde"
             >
               <svg
+                aria-hidden="true"
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
@@ -51,7 +55,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="mb-4 text-lg font-semibold text-verde">Informazioni</h4>
+          <h3 className="mb-4 text-lg font-semibold text-verde">Informazioni</h3>
           <ul className="space-y-2 text-sm">
             <li>
               <a href="/privacy" className="text-white/80 transition hover:text-verde">

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useFadeIn } from '../hooks/useFadeIn'
 import { useTypewriter } from '../hooks/useTypewriter'
 
@@ -7,16 +6,10 @@ const LINE2_TEXT = 'Si decide.'
 
 export function PercheOra() {
   const { ref, isVisible } = useFadeIn()
-  const [line2Ready, setLine2Ready] = useState(false)
 
   const line1 = useTypewriter(LINE1_TEXT, 55, isVisible)
+  const line2Ready = line1.length === LINE1_TEXT.length
   const line2 = useTypewriter(LINE2_TEXT, 55, line2Ready)
-
-  useEffect(() => {
-    if (line1.length === LINE1_TEXT.length) {
-      setLine2Ready(true)
-    }
-  }, [line1])
 
   const isCursorVisible = line2.length < LINE2_TEXT.length
 

@@ -1,7 +1,8 @@
 export function Hero() {
   return (
     <section
-      aria-label="Sezione hero — Alessio Manuelli Candidato Sindaco"
+      id="top"
+      aria-labelledby="hero-heading"
       className="relative flex min-h-screen items-end bg-cover bg-[position:60%_35%] pb-[130px] md:items-end md:bg-[position:50%_5%] md:pb-[160px]"
       style={{ backgroundImage: "url('/assets/images/alessio-hero.jpg')" }}
     >
@@ -13,13 +14,16 @@ export function Hero() {
             Lista Civica · Santa Marinella · Santa Severa
           </div>
 
-          <h1 className="mb-[0.5rem] text-[2.6rem] font-bold leading-[1.05] text-white md:text-[3.8rem]">
+          <h1
+            id="hero-heading"
+            className="mb-[0.5rem] text-[2.6rem] font-bold leading-[1.05] text-white md:text-[3.8rem]"
+          >
             Alessio Manuelli
           </h1>
 
-          <h2 className="mb-[0.75rem] text-[0.82rem] font-normal uppercase tracking-[0.18em] text-azzurro-chiaro md:mb-6 md:text-[1rem]">
+          <p className="mb-[0.75rem] text-[0.82rem] font-normal uppercase tracking-[0.18em] text-azzurro-chiaro md:mb-6 md:text-[1rem]">
             Candidato Sindaco
-          </h2>
+          </p>
 
           <div className="mt-[0.25rem] text-[1.5rem] font-bold text-verde [text-shadow:2px_2px_4px_rgba(0,0,0,0.3)] md:mt-0 md:text-[1.8rem] md:mb-10">
             #PrendiamociCura

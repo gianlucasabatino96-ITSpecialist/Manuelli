@@ -6,7 +6,7 @@ export function PrivacyPolicy() {
   return (
     <div id="top" className="min-h-screen bg-white text-testo-scuro">
       <Navbar />
-      <main className="pt-24">
+      <main id="main-content" className="pt-24">
         <section className="mx-auto max-w-3xl px-8 py-12 md:px-12">
           <h1 className="mb-4 text-3xl font-bold text-azzurro-intenso">Privacy Policy</h1>
           <p className="mb-4 text-sm leading-relaxed text-gray-600">

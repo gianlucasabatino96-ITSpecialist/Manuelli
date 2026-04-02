@@ -12,7 +12,7 @@ export const visioneStressTestDescription = `— Sicurezza stradale:
 • Dissuasori di velocità
 • Potenziamento dell’illuminazione pubblica nelle zone centrali e periferiche.
 
-— Monitoraggio infrastrutture:
+ — Monitoraggio infrastrutture:
 • Tavolo tecnico permanente con Società Autostrade, ANAS e RFI
 • Verifica costante e messa in sicurezza dei viadotti e dei sottopassi presenti sul territorio.`
 

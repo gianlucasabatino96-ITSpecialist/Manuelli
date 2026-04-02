@@ -4,11 +4,20 @@ type Direction = 'up' | 'left' | 'right'
 
 export function useFadeIn(direction: Direction = 'up') {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false
+    }
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  })
 
   useEffect(() => {
     const element = ref.current
     if (!element) return
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {

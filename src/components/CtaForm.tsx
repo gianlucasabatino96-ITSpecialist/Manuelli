@@ -36,25 +36,44 @@ export function CtaForm() {
           ref={ref}
           className={`transition-all duration-700 ${directionClasses}`}
         >
-          <form onSubmit={handleSubmit} className="mx-auto mt-8 max-w-lg space-y-4">
-            <input
-              type="text"
-              name="nome"
-              placeholder="Nome e cognome"
-              value={nome}
-              onChange={(event) => setNome(event.target.value)}
-              required
-              className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
-            />
-            <input
-              type="tel"
-              name="telefono"
-              placeholder="Numero di telefono"
-              value={telefono}
-              onChange={(event) => setTelefono(event.target.value)}
-              required
-              className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
-            />
+          <form
+            onSubmit={handleSubmit}
+            aria-label="Modulo per unirti alla campagna"
+            className="mx-auto mt-8 max-w-lg space-y-4"
+          >
+            <div>
+              <label htmlFor="cta-nome" className="sr-only">
+                Nome e cognome
+              </label>
+              <input
+                id="cta-nome"
+                type="text"
+                name="nome"
+                placeholder="Nome e cognome"
+                value={nome}
+                onChange={(event) => setNome(event.target.value)}
+                required
+                autoComplete="name"
+                className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
+              />
+            </div>
+            <div>
+              <label htmlFor="cta-telefono" className="sr-only">
+                Numero di telefono
+              </label>
+              <input
+                id="cta-telefono"
+                type="tel"
+                name="telefono"
+                placeholder="Numero di telefono"
+                value={telefono}
+                onChange={(event) => setTelefono(event.target.value)}
+                required
+                autoComplete="tel"
+                inputMode="tel"
+                className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
+              />
+            </div>
 
             <button
               type="submit"
@@ -63,14 +82,16 @@ export function CtaForm() {
               <WhatsAppIcon />
               <span>Unisciti su WhatsApp</span>
             </button>
-          </form>
 
-          {submitted ? (
-            <div className="mx-auto mt-6 max-w-lg rounded-2xl bg-white/20 p-6 text-sm backdrop-blur">
-              <h3 className="text-lg font-bold">Grazie! 🎉</h3>
-              <p className="mt-2">Ti contatteremo presto su WhatsApp.</p>
+            <div aria-live="polite" aria-atomic="true">
+              {submitted ? (
+                <div className="mx-auto mt-6 max-w-lg rounded-2xl bg-white/20 p-6 text-sm backdrop-blur">
+                  <h3 className="text-lg font-bold">Grazie! 🎉</h3>
+                  <p className="mt-2">Ti contatteremo presto su WhatsApp.</p>
+                </div>
+              ) : null}
             </div>
-          ) : null}
+          </form>
         </div>
 
         <p className="mt-4 text-sm text-white/80">Nessuno spam. Solo aggiornamenti sulla campagna.</p>

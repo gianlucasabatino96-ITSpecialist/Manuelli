@@ -11,14 +11,17 @@ export function Visione() {
   }
 
   return (
-    <section id="visione" aria-label="Il programma — Su cosa lavoreremo insieme" className="scroll-mt-24 bg-azzurro-bg px-8 py-20">
+    <section id="visione" aria-labelledby="visione-heading" className="scroll-mt-24 bg-azzurro-bg px-8 py-20">
       <div
         ref={ref}
         className={`mx-auto max-w-6xl transition-all duration-700 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
         }`}
       >
-        <h2 className="section-title text-center text-[1.8rem] font-bold text-azzurro-intenso md:text-[2.5rem]">
+        <h2
+          id="visione-heading"
+          className="section-title text-center text-[1.8rem] font-bold text-azzurro-intenso md:text-[2.5rem]"
+        >
           Su cosa lavoreremo insieme
         </h2>
         <p className="section-subtitle mx-auto mt-4 max-w-3xl text-center text-[0.95rem] text-gray-600 md:text-[1rem]">
@@ -42,7 +45,7 @@ export function Visione() {
               >
                 <div className="flex w-full items-center gap-4 md:flex-col md:text-center">
                   <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-verde/10 text-[2rem] transition-all duration-500 group-hover:-rotate-3 group-hover:scale-110 group-hover:bg-verde/20 md:mb-2 md:h-20 md:w-20 md:text-[2.5rem]">
-                    {card.emoji}
+                    <span aria-hidden="true">{card.emoji}</span>
                   </div>
                   <div className="flex min-h-[3.5rem] flex-1 items-center text-left md:min-h-[4.5rem] md:justify-center md:text-center">
                     <h3 className="text-lg font-bold text-testo-scuro md:text-xl lg:text-2xl">
@@ -53,6 +56,8 @@ export function Visione() {
 
                 <div className="mt-auto w-full space-y-4">
                   <div
+                    id={`card-detail-${index}`}
+                    aria-hidden={!isExpanded}
                     className={`w-full overflow-hidden transition-all duration-500 ease-in-out ${
                       isExpanded ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                     }`}
@@ -65,11 +70,18 @@ export function Visione() {
                   </div>
 
                   <button
+                    type="button"
                     onClick={() => toggleCard(card.title)}
+                    aria-expanded={isExpanded}
+                    aria-controls={`card-detail-${index}`}
+                    aria-label={
+                      isExpanded ? `Chiudi dettagli: ${card.title}` : `Scopri di più su: ${card.title}`
+                    }
                     className="mx-auto flex items-center gap-2 rounded-full bg-verde/5 px-5 py-2.5 text-sm font-bold text-verde transition-all duration-300 hover:bg-verde/10 hover:text-verde-scuro md:text-[0.95rem]"
                   >
                     <span>{isExpanded ? 'Chiudi' : 'Scopri di più'}</span>
                     <svg
+                      aria-hidden="true"
                       className={`h-4 w-4 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
                       fill="none"
                       viewBox="0 0 24 24"
