@@ -41,38 +41,40 @@ export function CtaForm() {
             aria-label="Modulo per unirti alla campagna"
             className="mx-auto mt-8 max-w-lg space-y-4"
           >
-            <div>
-              <label htmlFor="cta-nome" className="sr-only">
-                Nome e cognome
-              </label>
-              <input
-                id="cta-nome"
-                type="text"
-                name="nome"
-                placeholder="Nome e cognome"
-                value={nome}
-                onChange={(event) => setNome(event.target.value)}
-                required
-                autoComplete="name"
-                className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
-              />
-            </div>
-            <div>
-              <label htmlFor="cta-telefono" className="sr-only">
-                Numero di telefono
-              </label>
-              <input
-                id="cta-telefono"
-                type="tel"
-                name="telefono"
-                placeholder="Numero di telefono"
-                value={telefono}
-                onChange={(event) => setTelefono(event.target.value)}
-                required
-                autoComplete="tel"
-                inputMode="tel"
-                className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
-              />
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-3">
+              <div>
+                <label htmlFor="cta-nome" className="sr-only">
+                  Nome e cognome
+                </label>
+                <input
+                  id="cta-nome"
+                  type="text"
+                  name="nome"
+                  placeholder="Nome e cognome"
+                  value={nome}
+                  onChange={(event) => setNome(event.target.value)}
+                  required
+                  autoComplete="name"
+                  className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
+                />
+              </div>
+              <div>
+                <label htmlFor="cta-telefono" className="sr-only">
+                  Numero di telefono
+                </label>
+                <input
+                  id="cta-telefono"
+                  type="tel"
+                  name="telefono"
+                  placeholder="Numero di telefono"
+                  value={telefono}
+                  onChange={(event) => setTelefono(event.target.value)}
+                  required
+                  autoComplete="tel"
+                  inputMode="tel"
+                  className="w-full rounded-full px-6 py-4 text-[max(1rem,16px)] text-testo-scuro outline-none ring-0 focus:ring-2 focus:ring-white/60"
+                />
+              </div>
             </div>
 
             <button

@@ -9,8 +9,11 @@ export function SocialProof() {
     useCarousel({ totalSlides: testimonials.length, autoplayDelay: 5000 })
 
   const { ref: logosRef, isVisible: logosVisible } = useFadeIn()
-  const { ref: counterRef, isVisible: counterVisible } = useFadeIn()
-  const count = useCountUp(300, 2000, counterVisible)
+  const { ref: counterRef, isVisible: counterVisible } = useFadeIn<HTMLParagraphElement>('up', {
+    threshold: 0,
+    rootMargin: '0px',
+  })
+  const count = useCountUp(300, 3000, counterVisible)
 
   const translatePercentage = (currentIndex / Math.max(slidesPerView, 1)) * 100
 
@@ -48,24 +51,26 @@ export function SocialProof() {
         >
           <div className="overflow-hidden">
             <div
-              className="flex transition-transform duration-300 ease-in-out"
+              className="flex items-stretch transition-transform duration-300 ease-in-out"
               style={{ transform: `translateX(-${translatePercentage}%)` }}
             >
               {testimonials.map((testimonial) => (
                 <article
                   key={testimonial.author + testimonial.quote.slice(0, 16)}
-                  className="flex w-full flex-shrink-0 px-2 md:w-1/2"
+                  className="flex h-full min-h-0 w-full flex-shrink-0 px-2 md:w-1/2"
                 >
-                  <div className="flex h-full flex-col justify-between rounded-[10px] border-l-4 border-verde bg-azzurro-bg p-8">
-                    <p className="mb-4 text-[1rem] italic leading-[1.7] text-testo-scuro">
+                  <div className="flex h-full min-h-0 w-full flex-col justify-between gap-4 rounded-[10px] border-l-4 border-verde bg-azzurro-bg p-8">
+                    <p className="min-h-0 flex-1 text-[1rem] italic leading-[1.7] text-testo-scuro line-clamp-6">
                       "{testimonial.quote}"
                     </p>
-                    <div>
-                      <p className="mt-3 font-bold text-azzurro-intenso">
+                    <div className="shrink-0">
+                      <p className="font-bold text-azzurro-intenso">
                         {testimonial.author}
                       </p>
                       {testimonial.role ? (
-                        <p className="text-[0.75rem] font-normal text-gray-500">{testimonial.role}</p>
+                        <p className="text-[0.75rem] font-normal text-gray-700">
+                          {testimonial.role}
+                        </p>
                       ) : null}
                     </div>
                   </div>

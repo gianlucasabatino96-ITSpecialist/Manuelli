@@ -1,9 +1,23 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type RefObject } from 'react'
 
 type Direction = 'up' | 'left' | 'right'
 
-export function useFadeIn(direction: Direction = 'up') {
-  const ref = useRef<HTMLDivElement | null>(null)
+export type UseFadeInObserverOptions = {
+  threshold?: number
+  rootMargin?: string
+}
+
+const DEFAULT_THRESHOLD = 0.1
+const DEFAULT_ROOT_MARGIN = '0px 0px -50px 0px'
+
+export function useFadeIn<T extends HTMLElement = HTMLDivElement>(
+  direction: Direction = 'up',
+  observerOptions?: UseFadeInObserverOptions,
+): { ref: RefObject<T | null>; isVisible: boolean; directionClasses: string } {
+  const ref = useRef<T | null>(null)
+  const threshold = observerOptions?.threshold ?? DEFAULT_THRESHOLD
+  const rootMargin = observerOptions?.rootMargin ?? DEFAULT_ROOT_MARGIN
+
   const [isVisible, setIsVisible] = useState(() => {
     if (typeof window === 'undefined') {
       return false
@@ -26,7 +40,7 @@ export function useFadeIn(direction: Direction = 'up') {
           observer.unobserve(entry.target)
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+      { threshold, rootMargin },
     )
 
     observer.observe(element)
@@ -34,7 +48,7 @@ export function useFadeIn(direction: Direction = 'up') {
     return () => {
       observer.disconnect()
     }
-  }, [])
+  }, [threshold, rootMargin])
 
   const directionClasses = (() => {
     if (direction === 'left') {
